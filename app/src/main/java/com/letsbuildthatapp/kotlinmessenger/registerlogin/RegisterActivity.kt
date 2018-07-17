@@ -1,8 +1,7 @@
-package com.letsbuildthatapp.kotlinmessenger
+package com.letsbuildthatapp.kotlinmessenger.registerlogin
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -12,6 +11,9 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.letsbuildthatapp.kotlinmessenger.messages.LatestMessagesActivity
+import com.letsbuildthatapp.kotlinmessenger.R
+import com.letsbuildthatapp.kotlinmessenger.models.User
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
 
@@ -125,6 +127,11 @@ class RegisterActivity : AppCompatActivity() {
     ref.setValue(user)
         .addOnSuccessListener {
           Log.d(TAG, "Finally we saved the user to Firebase Database")
+
+          val intent = Intent(this, LatestMessagesActivity::class.java)
+          intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+          startActivity(intent)
+
         }
         .addOnFailureListener {
           Log.d(TAG, "Failed to set value to database: ${it.message}")
@@ -132,5 +139,3 @@ class RegisterActivity : AppCompatActivity() {
   }
 
 }
-
-class User(val uid: String, val username: String, val profileImageUrl: String)
