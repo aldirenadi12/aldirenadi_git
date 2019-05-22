@@ -31,7 +31,8 @@ class RegisterActivity : AppCompatActivity() {
       performRegister()
     }
 
-    already_have_account_text_view.setOnClickListener {
+    // mengecek, akun udah ada atau belum..
+      already_have_account_text_view.setOnClickListener {
       Log.d(TAG, "Try to show login activity")
 
       // launch the login activity somehow
@@ -39,12 +40,13 @@ class RegisterActivity : AppCompatActivity() {
       startActivity(intent)
     }
 
-    selectphoto_button_register.setOnClickListener {
+    // Mengecek image/foto
+      selectphoto_button_register.setOnClickListener {
       Log.d(TAG, "Try to show photo selector")
 
-      val intent = Intent(Intent.ACTION_PICK)
-      intent.type = "image/*"
-      startActivityForResult(intent, 0)
+      val intent = Intent(Intent.ACTION_PICK)               //ACTION PICK : memilih gambar dari salah satu aplikasi terpasang
+          intent.type = "image/*"
+          startActivityForResult(intent, 0)     // Untuk menerima hasil, panggil startActivityForResult()
     }
   }
 
@@ -63,7 +65,7 @@ class RegisterActivity : AppCompatActivity() {
 
       selectphoto_imageview_register.setImageBitmap(bitmap)
 
-      selectphoto_button_register.alpha = 0f
+      selectphoto_button_register.alpha = 0f        //????
 
 //      val bitmapDrawable = BitmapDrawable(bitmap)
 //      selectphoto_button_register.setBackgroundDrawable(bitmapDrawable)
@@ -75,7 +77,7 @@ class RegisterActivity : AppCompatActivity() {
     val password = password_edittext_register.text.toString()
 
     if (email.isEmpty() || password.isEmpty()) {
-      Toast.makeText(this, "Please enter text in email/pw", Toast.LENGTH_SHORT).show()
+      Toast.makeText(this, "Silahkan Masukkan email atau password", Toast.LENGTH_SHORT).show()
       return
     }
 
